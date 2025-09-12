@@ -112,5 +112,12 @@ final class ClubEntry
     {
         return $this->venueCount;
     }
+    /**
+     * @return VenueEntry[]
+     */
+    public function getVenueEntries(): array
+    {
+        return $this->venueEntries;
+    }
 
 }
