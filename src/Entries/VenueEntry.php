@@ -9,30 +9,10 @@ namespace Yoerioptr\TabtApiClient\Entries;
  */
 final class VenueEntry
 {
-
-    /**
-     * @var string
-     */
-    private string $name;
-
-    /**
-     * @var string
-     */
-    private string $street;
-
-    /**
-     * @var string
-     */
-    private string $town;
-
-    /**
-     * @var string|null
-     */
+    private string $name = '';
+    private string $street = '';
+    private string $town = '';
     private ?string $phone = null;
-
-    /**
-     * @var string|null
-     */
     private ?string $comment = null;
 
     /**
@@ -42,10 +22,14 @@ final class VenueEntry
      */
     public function __construct($rawResponse)
     {
-        foreach ((array) $rawResponse as $key => $value) {
-            $property = lcfirst($key);
-            $this->$property = $value;
-        }
+        $data = (array) $rawResponse;
+
+        // Mapper les propriétés connues
+        $this->name = $data['Name'] ?? $data['name'] ?? '';
+        $this->street = $data['Street'] ?? $data['street'] ?? '';
+        $this->town = $data['Town'] ?? $data['town'] ?? '';
+        $this->phone = $data['Phone'] ?? $data['phone'] ?? null;
+        $this->comment = $data['Comment'] ?? $data['comment'] ?? null;
     }
 
     /**
