@@ -22,14 +22,15 @@ final class VenueEntry
      */
     public function __construct($rawResponse)
     {
-        $data = (array) $rawResponse;
+        // Pour debug temporaire
+        var_dump($rawResponse); exit;
 
-        // Mapper les propriétés connues
-        $this->name = $data['Name'] ?? $data['name'] ?? '';
-        $this->street = $data['Street'] ?? $data['street'] ?? '';
-        $this->town = $data['Town'] ?? $data['town'] ?? '';
-        $this->phone = $data['Phone'] ?? $data['phone'] ?? null;
-        $this->comment = $data['Comment'] ?? $data['comment'] ?? null;
+        // Si $rawResponse est un stdClass, accès direct
+        $this->name = $rawResponse->Name ?? $rawResponse->name ?? '';
+        $this->street = $rawResponse->Street ?? $rawResponse->street ?? '';
+        $this->town = $rawResponse->Town ?? $rawResponse->town ?? '';
+        $this->phone = $rawResponse->Phone ?? $rawResponse->phone ?? null;
+        $this->comment = $rawResponse->Comment ?? $rawResponse->comment ?? null;
     }
 
     /**
