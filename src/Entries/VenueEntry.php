@@ -22,16 +22,16 @@ final class VenueEntry
      */
     public function __construct($rawResponse)
     {
-        // Pour debug temporaire
-        var_dump($rawResponse); exit;
+        // Conversion en objet si nécessaire
+        $data = is_object($rawResponse) ? $rawResponse : (object) $rawResponse;
 
-        // Si $rawResponse est un stdClass, accès direct
-        $this->name = $rawResponse->Name ?? $rawResponse->name ?? '';
-        $this->street = $rawResponse->Street ?? $rawResponse->street ?? '';
-        $this->town = $rawResponse->Town ?? $rawResponse->town ?? '';
-        $this->phone = $rawResponse->Phone ?? $rawResponse->phone ?? null;
-        $this->comment = $rawResponse->Comment ?? $rawResponse->comment ?? null;
+        $this->name = $data->Name ?? '';
+        $this->street = $data->Street ?? '';
+        $this->town = $data->Town ?? '';
+        $this->phone = $data->Phone ?? null;
+        $this->comment = $data->Comment ?? null;
     }
+
 
     /**
      * @return string
