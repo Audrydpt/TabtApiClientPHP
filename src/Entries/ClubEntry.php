@@ -52,6 +52,8 @@ final class ClubEntry
      */
     public function __construct($rawResponse)
     {
+        $this->venueEntries = []; // Initialiser le tableau
+
         foreach ((array) $rawResponse as $key => $value) {
             if ($key !== 'VenueEntries') {
                 $property = lcfirst($key);
@@ -59,7 +61,9 @@ final class ClubEntry
                 continue;
             }
 
-            foreach (!is_array($value) ? $value : [$value] as $venueEntry) {
+            // Correction de la logique
+            $venues = is_array($value) ? $value : [$value];
+            foreach ($venues as $venueEntry) {
                 $this->venueEntries[] = new VenueEntry($venueEntry);
             }
         }
