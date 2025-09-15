@@ -56,8 +56,15 @@ final class TournamentEntry
     {
         foreach ((array)$rawResponse as $key => $value) {
             $property = lcfirst($key);
-            // On stocke les dates sous forme de chaîne et on convertit dans les getters
-            $this->$property = $value;
+            if (property_exists($this, $property)) {
+                // Pour les propriétés string qui pourraient être des objets (venue, address)
+                if (in_array($property, ['venue', 'address']) && is_object($value)) {
+                    $this->$property = json_encode($value); // ou (string) $value si possible
+                } else {
+                    $this->$property = $value;
+                }
+            }
+            // Sinon, ignorer les propriétés inconnues
         }
     }
 
@@ -123,4 +130,3 @@ final class TournamentEntry
         }
     }
 }
-
