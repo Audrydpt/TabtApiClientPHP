@@ -9,6 +9,7 @@ use Yoerioptr\TabtApiClient\Repository\MatchRepository;
 use Yoerioptr\TabtApiClient\Repository\MemberRepository;
 use Yoerioptr\TabtApiClient\Repository\SeasonRepository;
 use Yoerioptr\TabtApiClient\Repository\TestRepository;
+use Yoerioptr\TabtApiClient\Repository\TournamentRepository;
 
 /**
  * Class Tabt
@@ -52,7 +53,7 @@ final class Tabt implements TabtInterface
     /**
      * {@inheritDoc}
      */
-    public function club(): ClubRepository
+    public function clubs(): ClubRepository
     {
         return new ClubRepository($this->client);
     }
@@ -60,7 +61,7 @@ final class Tabt implements TabtInterface
     /**
      * {@inheritDoc}
      */
-    public function division(): DivisionRepository
+    public function divisions(): DivisionRepository
     {
         return new DivisionRepository($this->client);
     }
@@ -68,7 +69,7 @@ final class Tabt implements TabtInterface
     /**
      * {@inheritDoc}
      */
-    public function match(): MatchRepository
+    public function matches(): MatchRepository
     {
         return new MatchRepository($this->client);
     }
@@ -76,9 +77,17 @@ final class Tabt implements TabtInterface
     /**
      * {@inheritDoc}
      */
-    public function member(): MemberRepository
+    public function members(): MemberRepository
     {
         return new MemberRepository($this->client);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function tournaments(): TournamentRepository
+    {
+        return new TournamentRepository($this->client);
     }
 
 }
